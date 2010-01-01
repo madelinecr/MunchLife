@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">MunchLifeActivity</string>
+    <string name="app_name">Munchkin Life Counter</string>
+		<string name="up_level">Up a Level</string>
+		<string name="down_level">Down a Level</string>
 </resources>
