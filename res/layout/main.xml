@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+ android:orientation="vertical"
+ android:layout_width="fill_parent"
+ android:layout_height="fill_parent">
 
-
-<Button android:id="@+id/up_button" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/up_level"/>
-<TextView android:id="@+id/current_level" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="Level 1"/>
-<Button android:id="@+id/down_button" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="@string/down_level"/>
+	<Button android:id="@+id/up_button"
+	 android:layout_width="fill_parent"
+	 android:layout_height="wrap_content"
+	 android:text="@string/up_level"/>
+	
+	<TextView android:id="@+id/current_level"
+	 android:layout_width="wrap_content"
+	 android:layout_height="wrap_content"
+	 android:layout_centerInParent="true"
+	 android:textSize="70sp"
+	 android:textStyle="bold"
+	 android:text="Level 1"/>
+	
+	<Button android:id="@+id/down_button"
+	 android:layout_width="fill_parent"
+	 android:layout_height="wrap_content"
+	 android:layout_alignParentBottom="true"
+	 android:text="@string/down_level"/>
 
 <!--
 <TextView  
@@ -16,5 +29,5 @@
     android:layout_height="wrap_content" 
     android:text="Hello World, MunchLifeActivity"
     /> -->
-</LinearLayout>
+</RelativeLayout>
 
