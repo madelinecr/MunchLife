@@ -8,7 +8,7 @@ import android.view.View.OnClickListener;
 
 public class MunchLifeActivity extends Activity
 {
-	private static final String CURRENT_LEVEL = "savedLevel";
+	private static final String KEY_LEVEL = "savedLevel";
 	private int level = 1;
 	
 	/** Called when the activity is first created. */
@@ -25,15 +25,38 @@ public class MunchLifeActivity extends Activity
 		down_button.setOnClickListener(mDownClickListener);
 		
 		// pull old level from savedInstanceState, or default it to 1
-		level = savedInstanceState != null ? savedInstanceState.getInt(CURRENT_LEVEL)
+		level = savedInstanceState != null ? savedInstanceState.getInt(KEY_LEVEL)
 		                                   : 1;
+	}
+	
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.options_menu, menu);
+		return super.onCreateOptionsMenu(menu);
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item)
+	{
+		switch(item.getItemId())
+		{
+			case R.id.reset:
+				level = 1;
+				TextView current_level = (TextView)findViewById(R.id.current_level);
+				current_level.setText("Level " + level);
+				return true;
+			default:
+				return super.onOptionsItemSelected(item);
+		}
 	}
 	
 	@Override
 	public void onSaveInstanceState(Bundle outState)
 	{
 		super.onSaveInstanceState(outState);
-		outState.putInt(CURRENT_LEVEL, level);
+		outState.putInt(KEY_LEVEL, level);
 	}
 
 	private OnClickListener mUpClickListener = new OnClickListener()
