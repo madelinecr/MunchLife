@@ -7,6 +7,7 @@
 	<Button android:id="@+id/up_button"
 	 android:layout_width="fill_parent"
 	 android:layout_height="wrap_content"
+	 android:layout_marginTop="5px"
 	 android:text="@string/up_level"/>
 	
 	<TextView android:id="@+id/current_level"
@@ -22,12 +23,4 @@
 	 android:layout_height="wrap_content"
 	 android:layout_alignParentBottom="true"
 	 android:text="@string/down_level"/>
-
-<!--
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="Hello World, MunchLifeActivity"
-    /> -->
 </RelativeLayout>
-
