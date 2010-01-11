@@ -29,8 +29,9 @@ import android.view.View.OnClickListener;
 
 public class MunchLifeActivity extends Activity
 {
-	private static final String KEY_LEVEL = "savedLevel";
-	private int level = 1;
+	public static final String KEY_LEVEL = "savedLevel";
+	public TextView current_level;
+	public int level = 1;
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -45,9 +46,13 @@ public class MunchLifeActivity extends Activity
 		Button down_button = (Button)findViewById(R.id.down_button);
 		down_button.setOnClickListener(mDownClickListener);
 		
+		current_level = (TextView)findViewById(R.id.current_level);
+		
 		// pull old level from savedInstanceState, or default it to 1
 		level = savedInstanceState != null ? savedInstanceState.getInt(KEY_LEVEL)
 		                                   : 1;
+		
+		current_level.setText("Level " + level);
 	}
 	
 	@Override
@@ -85,7 +90,6 @@ public class MunchLifeActivity extends Activity
 		@Override
 		public void onClick(View v)
 		{
-			TextView current_level = (TextView)findViewById(R.id.current_level);
 			if(level < 10)
 			{
 				level = level + 1;
@@ -99,7 +103,6 @@ public class MunchLifeActivity extends Activity
 		@Override
 		public void onClick(View v)
 		{
-			TextView current_level = (TextView)findViewById(R.id.current_level);
 			if(level > 1)
 			{
 				level = level - 1;
