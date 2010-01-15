@@ -40,6 +40,7 @@ public class MunchLifeActivity extends Activity
 {
 	public static final int DIALOG_SETTINGS = 0;
 	public static final String KEY_LEVEL = "savedLevel";
+	public static final String KEY_MAXLEVEL = "maxLevel";
 	public TextView current_level;
 	public int level = 1;
 	public int max_level = 10;
@@ -62,6 +63,9 @@ public class MunchLifeActivity extends Activity
 		// pull old level from savedInstanceState, or default it to 1
 		level = savedInstanceState != null ? savedInstanceState.getInt(KEY_LEVEL)
 		                                   : 1;
+		
+		SharedPreferences settings = getPreferences(0);
+		max_level = settings.getInt(KEY_MAXLEVEL, 10);
 		
 		current_level.setText("Level " + level);
 	}
@@ -97,6 +101,16 @@ public class MunchLifeActivity extends Activity
 	{
 		super.onSaveInstanceState(outState);
 		outState.putInt(KEY_LEVEL, level);
+	}
+	
+	@Override
+	protected void onPause()
+	{
+		super.onPause();
+		SharedPreferences settings = getPreferences(0);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putInt(KEY_MAXLEVEL, max_level);
+		editor.commit();
 	}
 	
 	@Override
