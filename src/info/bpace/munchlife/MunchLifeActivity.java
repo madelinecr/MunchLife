@@ -20,6 +20,7 @@ import android.os.Bundle;
 
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import android.view.MenuInflater;
 import android.view.View;
@@ -27,11 +28,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View.OnClickListener;
 
+import android.app.Dialog;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
+
+import android.util.Log;
+
 public class MunchLifeActivity extends Activity
 {
+	public static final int DIALOG_SETTINGS = 0;
 	public static final String KEY_LEVEL = "savedLevel";
 	public TextView current_level;
 	public int level = 1;
+	public int max_level = 10;
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -73,6 +84,9 @@ public class MunchLifeActivity extends Activity
 				TextView current_level = (TextView)findViewById(R.id.current_level);
 				current_level.setText("Level " + level);
 				return true;
+			case R.id.settings:
+				showDialog(DIALOG_SETTINGS);
+				return true;
 			default:
 				return super.onOptionsItemSelected(item);
 		}
@@ -84,13 +98,50 @@ public class MunchLifeActivity extends Activity
 		super.onSaveInstanceState(outState);
 		outState.putInt(KEY_LEVEL, level);
 	}
+	
+	@Override
+	protected Dialog onCreateDialog(int id)
+	{
+		switch(id)
+		{
+			case DIALOG_SETTINGS:
+				Log.d("MunchLife", "Creating settings dialog");
+				final CharSequence[] options = {"Standard Munchkin", "Epic Munchkin"};
+				AlertDialog.Builder builder = new AlertDialog.Builder(this);
+				builder.setTitle(R.string.settings);
+				builder.setSingleChoiceItems(options, 0, new DialogInterface.OnClickListener()
+				{
+				    public void onClick(DialogInterface dialog, int item)
+					{
+						Toast.makeText(getApplicationContext(), options[item], Toast.LENGTH_SHORT).show();
+						if(item == 0)
+						{
+							max_level = 10;
+							if(level > 10)
+							{
+								level = 10;
+								current_level.setText("Level " + level);
+							}
+						}
+						else
+						{
+							max_level = 20;
+						}
+						dialog.dismiss();
+				    }
+				});
+				return builder.create();
+			default:
+				return super.onCreateDialog(id);
+		}
+	}
 
 	private OnClickListener mUpClickListener = new OnClickListener()
 	{
 		@Override
 		public void onClick(View v)
 		{
-			if(level < 10)
+			if(level < max_level)
 			{
 				level = level + 1;
 				current_level.setText("Level " + level);

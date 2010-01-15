@@ -1,5 +1,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 	<item android:id="@+id/reset"
-	 android:title="Reset Level"
-	 android:icon="@android:drawable/ic_menu_delete" />
+	 android:title="@string/reset"
+	 android:icon="@android:drawable/ic_menu_close_clear_cancel" />
+	<item android:id="@+id/settings"
+	 android:title="@string/settings"
+	 android:icon="@android:drawable/ic_menu_manage" />
 </menu>
