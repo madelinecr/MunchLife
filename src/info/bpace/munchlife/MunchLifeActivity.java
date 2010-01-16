@@ -45,7 +45,9 @@ public class MunchLifeActivity extends Activity
 	public int level = 1;
 	public int max_level = 10;
 	
-	/** Called when the activity is first created. */
+	/**
+	 * Restores level from saved instance and gamemode setting from preferences
+	 */
 	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
@@ -70,6 +72,32 @@ public class MunchLifeActivity extends Activity
 		current_level.setText("Level " + level);
 	}
 	
+	/**
+	 * Save the currently displayed level
+	 */
+	@Override
+	public void onSaveInstanceState(Bundle outState)
+	{
+		super.onSaveInstanceState(outState);
+		outState.putInt(KEY_LEVEL, level);
+	}
+	
+	/**
+	 * Save the current settings option for game mode into simple preferences
+	 */
+	@Override
+	protected void onPause()
+	{
+		super.onPause();
+		SharedPreferences settings = getPreferences(0);
+		SharedPreferences.Editor editor = settings.edit();
+		editor.putInt(KEY_MAXLEVEL, max_level);
+		editor.commit();
+	}
+	
+	/**
+	 * Create options menu from XML
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
@@ -78,6 +106,9 @@ public class MunchLifeActivity extends Activity
 		return super.onCreateOptionsMenu(menu);
 	}
 	
+	/**
+	 * Logic for options menu
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item)
 	{
@@ -96,23 +127,9 @@ public class MunchLifeActivity extends Activity
 		}
 	}
 	
-	@Override
-	public void onSaveInstanceState(Bundle outState)
-	{
-		super.onSaveInstanceState(outState);
-		outState.putInt(KEY_LEVEL, level);
-	}
-	
-	@Override
-	protected void onPause()
-	{
-		super.onPause();
-		SharedPreferences settings = getPreferences(0);
-		SharedPreferences.Editor editor = settings.edit();
-		editor.putInt(KEY_MAXLEVEL, max_level);
-		editor.commit();
-	}
-	
+	/**
+	 * Controls settings dialog
+	 */
 	@Override
 	protected Dialog onCreateDialog(int id)
 	{
@@ -161,6 +178,9 @@ public class MunchLifeActivity extends Activity
 		}
 	}
 
+	/**
+	 * Increases the level by one and refreshes view as long as it is below max_level
+	 */
 	private OnClickListener mUpClickListener = new OnClickListener()
 	{
 		@Override
@@ -174,6 +194,9 @@ public class MunchLifeActivity extends Activity
 		}
 	};
 	
+	/**
+	 * Decreases the level by one and refreshes view as long as it is above 1
+	 */
 	private OnClickListener mDownClickListener = new OnClickListener()
 	{
 		@Override
