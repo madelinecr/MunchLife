@@ -123,7 +123,18 @@ public class MunchLifeActivity extends Activity
 				final CharSequence[] options = {"Standard Munchkin", "Epic Munchkin"};
 				AlertDialog.Builder builder = new AlertDialog.Builder(this);
 				builder.setTitle(R.string.settings);
-				builder.setSingleChoiceItems(options, 0, new DialogInterface.OnClickListener()
+				
+				int setting;
+				if(getPreferences(0).getInt(KEY_MAXLEVEL, 10) == 10)
+				{
+					setting = 0;
+				}
+				else
+				{
+					setting = 1;
+				}
+				
+				builder.setSingleChoiceItems(options, setting, new DialogInterface.OnClickListener()
 				{
 				    public void onClick(DialogInterface dialog, int item)
 					{
