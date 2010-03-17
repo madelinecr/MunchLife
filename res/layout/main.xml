@@ -29,17 +29,18 @@
 		 android:text="1"/>
 		
 		<TextView android:id="@+id/current_gear_level"
+		 android:layout_width="wrap_content"
 		 android:layout_gravity="center"
 		 android:textSize="70sp"
 		 android:textStyle="bold"
-		 android:text="+0"/>
+		 android:text="0"/>
 	</TableRow>
 	
 	<TableRow>
 		<Button android:id="@+id/down_button"
 		 android:text="@string/down_level"/>
 		
-		<Button android:id="@+id/gear_down_button"
+		<Button android:id="@+id/down_gear_button"
 		 android:text="Remove Gear"/>
 	</TableRow>
 	
@@ -53,6 +54,6 @@
  android:layout_below="@id/level_table"
  android:textSize="140sp"
  android:textStyle="bold"
- android:text="15"/>
+ android:text="1"/>
 
 </RelativeLayout>

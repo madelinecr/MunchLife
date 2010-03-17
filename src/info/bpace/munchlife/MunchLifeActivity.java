@@ -41,8 +41,11 @@ public class MunchLifeActivity extends Activity
 	public static final String KEY_LEVEL = "savedLevel";
 	public static final String KEY_MAXLEVEL = "maxLevel";
 	public TextView current_level;
+	public TextView current_gear_level;
+	public TextView total_level;
 	public int level = 1;
 	public int max_level = 10;
+	public int gear_level = 0;
 	
 	/**
 	 * Restores level from saved instance and gamemode setting from preferences
@@ -54,12 +57,20 @@ public class MunchLifeActivity extends Activity
 		setContentView(R.layout.main);
 
 		Button up_button = (Button)findViewById(R.id.up_button);
-		up_button.setOnClickListener(mUpClickListener);
+		up_button.setOnClickListener(levelUpClickListener);
 		
 		Button down_button = (Button)findViewById(R.id.down_button);
-		down_button.setOnClickListener(mDownClickListener);
+		down_button.setOnClickListener(levelDownClickListener);
+		
+		Button up_gear_button = (Button)findViewById(R.id.up_gear_button);
+		up_gear_button.setOnClickListener(gearUpClickListener);
+		
+		Button down_gear_button = (Button)findViewById(R.id.down_gear_button);
+		down_gear_button.setOnClickListener(gearDownClickListener);
 		
 		current_level = (TextView)findViewById(R.id.current_level);
+		current_gear_level = (TextView)findViewById(R.id.current_gear_level);
+		total_level = (TextView)findViewById(R.id.total_level);
 		
 		// pull old level from savedInstanceState, or default it to 1
 		level = savedInstanceState != null ? savedInstanceState.getInt(KEY_LEVEL)
@@ -180,7 +191,7 @@ public class MunchLifeActivity extends Activity
 	/**
 	 * Increases the level by one and refreshes view as long as it is below max_level
 	 */
-	private OnClickListener mUpClickListener = new OnClickListener()
+	private OnClickListener levelUpClickListener = new OnClickListener()
 	{
 		@Override
 		public void onClick(View v)
@@ -189,6 +200,7 @@ public class MunchLifeActivity extends Activity
 			{
 				level = level + 1;
 				current_level.setText(Integer.toString(level));
+				total_level.setText(Integer.toString(level + gear_level));
 			}
 		}
 	};
@@ -196,7 +208,7 @@ public class MunchLifeActivity extends Activity
 	/**
 	 * Decreases the level by one and refreshes view as long as it is above 1
 	 */
-	private OnClickListener mDownClickListener = new OnClickListener()
+	private OnClickListener levelDownClickListener = new OnClickListener()
 	{
 		@Override
 		public void onClick(View v)
@@ -205,6 +217,35 @@ public class MunchLifeActivity extends Activity
 			{
 				level = level - 1;
 				current_level.setText(Integer.toString(level));
+				total_level.setText(Integer.toString(level + gear_level));
+			}
+		}
+	};
+	
+	private OnClickListener gearUpClickListener = new OnClickListener()
+	{
+		@Override
+		public void onClick(View v)
+		{
+			if(gear_level < 99)
+			{
+				gear_level = gear_level + 1;
+				current_gear_level.setText(Integer.toString(gear_level));
+				total_level.setText(Integer.toString(level + gear_level));
+			}
+		}
+	};
+	
+	private OnClickListener gearDownClickListener = new OnClickListener()
+	{
+		@Override
+		public void onClick(View v)
+		{
+			if(gear_level > 0)
+			{
+				gear_level = gear_level - 1;
+				current_gear_level.setText(Integer.toString(gear_level));
+				total_level.setText(Integer.toString(level + gear_level));
 			}
 		}
 	};
