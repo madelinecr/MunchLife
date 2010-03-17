@@ -22,6 +22,7 @@
 	
 	<TableRow>
 		<TextView android:id="@+id/current_level"
+		 android:layout_width="wrap_content"
 		 android:layout_gravity="center"
 		 android:textSize="70sp"
 		 android:textStyle="bold"
