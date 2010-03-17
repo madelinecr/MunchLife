@@ -68,7 +68,7 @@ public class MunchLifeActivity extends Activity
 		SharedPreferences settings = getPreferences(0);
 		max_level = settings.getInt(KEY_MAXLEVEL, 10);
 		
-		current_level.setText("Level " + level);
+		current_level.setText(Integer.toString(level));
 	}
 	
 	/**
@@ -161,7 +161,7 @@ public class MunchLifeActivity extends Activity
 							if(level > 10)
 							{
 								level = 10;
-								current_level.setText("Level " + level);
+								current_level.setText(Integer.toString(level));
 							}
 						}
 						else
@@ -188,7 +188,7 @@ public class MunchLifeActivity extends Activity
 			if(level < max_level)
 			{
 				level = level + 1;
-				current_level.setText("Level " + level);
+				current_level.setText(Integer.toString(level));
 			}
 		}
 	};
@@ -204,7 +204,7 @@ public class MunchLifeActivity extends Activity
 			if(level > 1)
 			{
 				level = level - 1;
-				current_level.setText("Level " + level);
+				current_level.setText(Integer.toString(level));
 			}
 		}
 	};
