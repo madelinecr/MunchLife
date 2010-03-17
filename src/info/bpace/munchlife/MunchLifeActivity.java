@@ -18,6 +18,8 @@ package info.bpace.munchlife;
 import android.app.Activity;
 import android.os.Bundle;
 
+import android.media.MediaPlayer;
+
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,6 +53,8 @@ public class MunchLifeActivity extends Activity
 	public int max_level = 10;
 	public int gear_level = 0;
 	
+	private MediaPlayer mp;
+	
 	/**
 	 * Restores level from saved instance and gamemode setting from preferences
 	 */
@@ -75,6 +79,9 @@ public class MunchLifeActivity extends Activity
 		current_level = (TextView)findViewById(R.id.current_level);
 		current_gear_level = (TextView)findViewById(R.id.current_gear_level);
 		total_level = (TextView)findViewById(R.id.total_level);
+		
+		// set up media
+		mp = MediaPlayer.create(this, R.raw.fanfare);
 		
 		// pull old level from savedInstanceState, or default it to 1
 		level = savedInstanceState != null ? savedInstanceState.getInt(KEY_LEVEL)
@@ -216,6 +223,10 @@ public class MunchLifeActivity extends Activity
 				level = level + 1;
 				current_level.setText(Integer.toString(level));
 				total_level.setText(Integer.toString(level + gear_level));
+			}
+			if(level == max_level)
+			{
+				mp.start();
 			}
 		}
 	};
