@@ -38,11 +38,15 @@ import android.util.Log;
 public class MunchLifeActivity extends Activity
 {
 	public static final int DIALOG_SETTINGS = 0;
+	
 	public static final String KEY_LEVEL = "savedLevel";
+	public static final String KEY_GEAR_LEVEL = "savedGearLevel";
 	public static final String KEY_MAXLEVEL = "maxLevel";
+	
 	public TextView current_level;
 	public TextView current_gear_level;
 	public TextView total_level;
+	
 	public int level = 1;
 	public int max_level = 10;
 	public int gear_level = 0;
@@ -75,11 +79,15 @@ public class MunchLifeActivity extends Activity
 		// pull old level from savedInstanceState, or default it to 1
 		level = savedInstanceState != null ? savedInstanceState.getInt(KEY_LEVEL)
 		                                   : 1;
+		gear_level = savedInstanceState != null ? savedInstanceState.getInt(KEY_GEAR_LEVEL)
+		                                        : 0;
 		
 		SharedPreferences settings = getPreferences(0);
 		max_level = settings.getInt(KEY_MAXLEVEL, 10);
 		
 		current_level.setText(Integer.toString(level));
+		current_gear_level.setText(Integer.toString(gear_level));
+		total_level.setText(Integer.toString(level + gear_level));
 	}
 	
 	/**
@@ -90,6 +98,7 @@ public class MunchLifeActivity extends Activity
 	{
 		super.onSaveInstanceState(outState);
 		outState.putInt(KEY_LEVEL, level);
+		outState.putInt(KEY_GEAR_LEVEL, gear_level);
 	}
 	
 	/**
@@ -126,8 +135,10 @@ public class MunchLifeActivity extends Activity
 		{
 			case R.id.reset:
 				level = 1;
-				TextView current_level = (TextView)findViewById(R.id.current_level);
-				current_level.setText("Level " + level);
+				gear_level = 0;
+				current_level.setText(Integer.toString(level));
+				current_gear_level.setText(Integer.toString(gear_level));
+				total_level.setText("1");
 				return true;
 			case R.id.settings:
 				showDialog(DIALOG_SETTINGS);
@@ -146,7 +157,7 @@ public class MunchLifeActivity extends Activity
 		switch(id)
 		{
 			case DIALOG_SETTINGS:
-				Log.d("MunchLife", "Creating settings dialog");
+				// Log.d("MunchLife", "Creating settings dialog");
 				final CharSequence[] options = {"Standard Munchkin", "Epic Munchkin"};
 				AlertDialog.Builder builder = new AlertDialog.Builder(this);
 				builder.setTitle(R.string.settings);
@@ -161,7 +172,8 @@ public class MunchLifeActivity extends Activity
 					setting = 1;
 				}
 				
-				builder.setSingleChoiceItems(options, setting, new DialogInterface.OnClickListener()
+				// build click listener for alertdialog
+				DialogInterface.OnClickListener settingsClickListener = new DialogInterface.OnClickListener()
 				{
 				    public void onClick(DialogInterface dialog, int item)
 					{
@@ -173,6 +185,7 @@ public class MunchLifeActivity extends Activity
 							{
 								level = 10;
 								current_level.setText(Integer.toString(level));
+								total_level.setText(Integer.toString(level + gear_level));
 							}
 						}
 						else
@@ -180,8 +193,10 @@ public class MunchLifeActivity extends Activity
 							max_level = 20;
 						}
 						dialog.dismiss();
-				    }
-				});
+					}
+				};
+				
+				builder.setSingleChoiceItems(options, setting, settingsClickListener);
 				return builder.create();
 			default:
 				return super.onCreateDialog(id);
