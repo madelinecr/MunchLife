@@ -17,7 +17,7 @@
 		
 			<Button android:id="@+id/up_gear_button"
 			 android:layout_marginTop="5px"
-			 android:text="Add Gear"/>
+			 android:text="@string/up_gear_level"/>
 		</TableRow>
 	
 		<TableRow>
@@ -41,7 +41,7 @@
 			 android:text="@string/down_level"/>
 		
 			<Button android:id="@+id/down_gear_button"
-			 android:text="Remove Gear"/>
+			 android:text="@string/down_gear_level"/>
 		</TableRow>
 	
 	
