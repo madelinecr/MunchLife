@@ -6,4 +6,7 @@
 	
 	<string name="reset">Reset Level</string>
 	<string name="settings">Change Settings</string>
+	
+	<string name="win">You have won!</string>
+	<string name="ok">Okay</string>
 </resources>

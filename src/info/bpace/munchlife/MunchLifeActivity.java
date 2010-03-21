@@ -38,6 +38,7 @@ import android.util.Log;
 public class MunchLifeActivity extends Activity
 {
 	public static final int DIALOG_SETTINGS = 0;
+	public static final int DIALOG_GAMEWIN = 1;
 	
 	public static final String KEY_LEVEL = "savedLevel";
 	public static final String KEY_GEAR_LEVEL = "savedGearLevel";
@@ -159,8 +160,8 @@ public class MunchLifeActivity extends Activity
 			case DIALOG_SETTINGS:
 				// Log.d("MunchLife", "Creating settings dialog");
 				final CharSequence[] options = {"Standard Munchkin", "Epic Munchkin"};
-				AlertDialog.Builder builder = new AlertDialog.Builder(this);
-				builder.setTitle(R.string.settings);
+				AlertDialog.Builder settingsBuilder = new AlertDialog.Builder(this);
+				settingsBuilder.setTitle(R.string.settings);
 				
 				int setting;
 				if(getPreferences(0).getInt(KEY_MAXLEVEL, 10) == 10)
@@ -196,8 +197,23 @@ public class MunchLifeActivity extends Activity
 					}
 				};
 				
-				builder.setSingleChoiceItems(options, setting, settingsClickListener);
-				return builder.create();
+				settingsBuilder.setSingleChoiceItems(options, setting, settingsClickListener);
+				return settingsBuilder.create();
+				
+			case DIALOG_GAMEWIN:
+			
+				AlertDialog.Builder gamewinbuilder = new AlertDialog.Builder(this);
+				gamewinbuilder.setMessage(R.string.win);
+				DialogInterface.OnClickListener gamewinClickListener = new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int item)
+					{
+						dialog.dismiss();
+					}
+				};
+				gamewinbuilder.setNeutralButton(R.string.ok, gamewinClickListener);
+				return gamewinbuilder.create();	
+			
 			default:
 				return super.onCreateDialog(id);
 		}
@@ -216,6 +232,11 @@ public class MunchLifeActivity extends Activity
 				level = level + 1;
 				current_level.setText(Integer.toString(level));
 				total_level.setText(Integer.toString(level + gear_level));
+				// if you've won, display message
+				if(level == max_level)
+				{
+					showDialog(DIALOG_GAMEWIN);
+				}
 			}
 		}
 	};
