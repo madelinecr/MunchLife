@@ -13,6 +13,7 @@
 	<string name="ok">Okay</string>
 	
 	<!-- preferences strings -->
+	<string name="prefTitle">MunchLife Settings</string>
 	<string name="sleep">Keep Screen Awake</string>
 	<string name="sleepSummary">Keep screen from sleeping</string>
 	<string name="gamemode">Game Mode</string>
