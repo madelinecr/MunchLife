@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+	<PreferenceCategory android:title="MunchLife Settings">
+		<CheckBoxPreference
+		 android:title="Keep Screen Awake"
+		 android:defaultValue="false"
+		 android:summary="Keeps screen from sleeping"
+		 android:key="sleepPref" />
+		 
+		<ListPreference
+		 android:title="Game Mode"
+		 android:defaultValue="std"
+		 android:summary="Which game mode to play with"
+		 android:key="gamemodePref"
+		 android:entries="@array/gamemodeDisplay"
+		 android:entryValues="@array/gamemode" />
+	</PreferenceCategory>
+	
+</PreferenceScreen>

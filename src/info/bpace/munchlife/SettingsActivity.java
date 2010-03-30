@@ -16,19 +16,17 @@
 package info.bpace.munchlife;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.widget.TextView;
+import android.preference.Preference;
+import android.preference.PreferenceActivity;
 
-public class SettingsActivity extends Activity
+public class SettingsActivity extends PreferenceActivity
 {
 	@Override
-	public void onCreate(Bundle savedInstanceState)
+	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		
-		TextView tx = new TextView(getApplicationContext());
-		tx.setText("Test");
-		setContentView(tx);
-		
+		addPreferencesFromResource(R.xml.preferences);
 	}
 }
