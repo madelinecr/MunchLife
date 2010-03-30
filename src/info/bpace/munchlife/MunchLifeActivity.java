@@ -70,6 +70,7 @@ public class MunchLifeActivity extends Activity
 		wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, TAG);
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		sleepPref = prefs.getBoolean("sleepPref", false);
+		gamemodePref = prefs.getString("gamemodePref", "std");
 		if(sleepPref == true)
 		{
 			wl.acquire();
