@@ -32,6 +32,7 @@ import android.app.Dialog;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.content.Intent;
 
 import android.util.Log;
 
@@ -142,7 +143,9 @@ public class MunchLifeActivity extends Activity
 				total_level.setText("1");
 				return true;
 			case R.id.settings:
-				showDialog(DIALOG_SETTINGS);
+				// showDialog(DIALOG_SETTINGS);
+				Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
+				startActivity(i);
 				return true;
 			default:
 				return super.onOptionsItemSelected(item);
