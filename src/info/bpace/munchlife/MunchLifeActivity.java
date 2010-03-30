@@ -17,6 +17,7 @@ package info.bpace.munchlife;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.PowerManager;
 
 import android.widget.Button;
 import android.widget.TextView;
@@ -34,6 +35,8 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.Intent;
 
+import android.preference.PreferenceManager;
+
 import android.util.Log;
 
 public class MunchLifeActivity extends Activity
@@ -41,6 +44,7 @@ public class MunchLifeActivity extends Activity
 	public static final int DIALOG_SETTINGS = 0;
 	public static final int DIALOG_GAMEWIN = 1;
 	
+	public static final String TAG = "MunchLife";
 	public static final String KEY_LEVEL = "savedLevel";
 	public static final String KEY_GEAR_LEVEL = "savedGearLevel";
 	public static final String KEY_MAXLEVEL = "maxLevel";
@@ -49,9 +53,28 @@ public class MunchLifeActivity extends Activity
 	public TextView current_gear_level;
 	public TextView total_level;
 	
+	PowerManager pm;
+	PowerManager.WakeLock wl;
+	
 	public int level = 1;
 	public int max_level = 10;
 	public int gear_level = 0;
+	public boolean sleepPref;
+	public String gamemodePref;
+	
+	@Override
+	protected void onStart()
+	{
+		super.onStart();
+		pm = (PowerManager) getSystemService(POWER_SERVICE);
+		wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, TAG);
+		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		sleepPref = prefs.getBoolean("sleepPref", false);
+		if(sleepPref == true)
+		{
+			wl.acquire();
+		}
+	}
 	
 	/**
 	 * Restores level from saved instance and gamemode setting from preferences
@@ -110,6 +133,10 @@ public class MunchLifeActivity extends Activity
 	protected void onPause()
 	{
 		super.onPause();
+		if(sleepPref == true)
+		{
+			 wl.release();
+		}
 		SharedPreferences settings = getPreferences(0);
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putInt(KEY_MAXLEVEL, max_level);
