@@ -3,15 +3,15 @@
 
 	<PreferenceCategory android:title="MunchLife Settings">
 		<CheckBoxPreference
-		 android:title="Keep Screen Awake"
+		 android:title="@string/sleep"
 		 android:defaultValue="false"
-		 android:summary="Keeps screen from sleeping"
+		 android:summary="@string/sleepSummary"
 		 android:key="sleepPref" />
 		 
 		<ListPreference
-		 android:title="Game Mode"
+		 android:title="@string/gamemode"
 		 android:defaultValue="std"
-		 android:summary="Which game mode to play with"
+		 android:summary="@string/gamemodeSummary"
 		 android:key="gamemodePref"
 		 android:entries="@array/gamemodeDisplay"
 		 android:entryValues="@array/gamemode" />

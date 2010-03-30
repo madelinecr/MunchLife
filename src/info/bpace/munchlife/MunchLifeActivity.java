@@ -41,13 +41,11 @@ import android.util.Log;
 
 public class MunchLifeActivity extends Activity
 {
-	public static final int DIALOG_SETTINGS = 0;
-	public static final int DIALOG_GAMEWIN = 1;
+	public static final int DIALOG_GAMEWIN = 0;
 	
 	public static final String TAG = "MunchLife";
 	public static final String KEY_LEVEL = "savedLevel";
 	public static final String KEY_GEAR_LEVEL = "savedGearLevel";
-	public static final String KEY_MAXLEVEL = "maxLevel";
 	
 	public TextView current_level;
 	public TextView current_gear_level;
@@ -62,6 +60,10 @@ public class MunchLifeActivity extends Activity
 	public boolean sleepPref;
 	public String gamemodePref;
 	
+	/**
+	 * Pulls preferences and makes sure current application state matches 
+	 * what is expected from preferences
+	 */
 	@Override
 	protected void onStart()
 	{
@@ -71,6 +73,23 @@ public class MunchLifeActivity extends Activity
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		sleepPref = prefs.getBoolean("sleepPref", false);
 		gamemodePref = prefs.getString("gamemodePref", "std");
+		
+		if(gamemodePref.equals("epic"))
+		{
+			max_level = 20;
+		}
+		else
+		{
+			max_level = 10;
+		}
+		
+		if(level > max_level)
+		{
+			level = max_level;
+			current_level.setText(Integer.toString(level));
+			total_level.setText(Integer.toString(level + gear_level));
+		}
+		
 		if(sleepPref == true)
 		{
 			wl.acquire();
@@ -107,10 +126,7 @@ public class MunchLifeActivity extends Activity
 		                                   : 1;
 		gear_level = savedInstanceState != null ? savedInstanceState.getInt(KEY_GEAR_LEVEL)
 		                                        : 0;
-		
-		SharedPreferences settings = getPreferences(0);
-		max_level = settings.getInt(KEY_MAXLEVEL, 10);
-		
+			
 		current_level.setText(Integer.toString(level));
 		current_gear_level.setText(Integer.toString(gear_level));
 		total_level.setText(Integer.toString(level + gear_level));
@@ -138,10 +154,6 @@ public class MunchLifeActivity extends Activity
 		{
 			 wl.release();
 		}
-		SharedPreferences settings = getPreferences(0);
-		SharedPreferences.Editor editor = settings.edit();
-		editor.putInt(KEY_MAXLEVEL, max_level);
-		editor.commit();
 	}
 	
 	/**
@@ -171,7 +183,6 @@ public class MunchLifeActivity extends Activity
 				total_level.setText("1");
 				return true;
 			case R.id.settings:
-				// showDialog(DIALOG_SETTINGS);
 				Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
 				startActivity(i);
 				return true;
@@ -188,49 +199,6 @@ public class MunchLifeActivity extends Activity
 	{
 		switch(id)
 		{
-			case DIALOG_SETTINGS:
-				// Log.d("MunchLife", "Creating settings dialog");
-				final CharSequence[] options = {"Standard Munchkin", "Epic Munchkin"};
-				AlertDialog.Builder settingsBuilder = new AlertDialog.Builder(this);
-				settingsBuilder.setTitle(R.string.settings);
-				
-				int setting;
-				if(getPreferences(0).getInt(KEY_MAXLEVEL, 10) == 10)
-				{
-					setting = 0;
-				}
-				else
-				{
-					setting = 1;
-				}
-				
-				// build click listener for alertdialog
-				DialogInterface.OnClickListener settingsClickListener = new DialogInterface.OnClickListener()
-				{
-				    public void onClick(DialogInterface dialog, int item)
-					{
-						Toast.makeText(getApplicationContext(), options[item], Toast.LENGTH_SHORT).show();
-						if(item == 0)
-						{
-							max_level = 10;
-							if(level > 10)
-							{
-								level = 10;
-								current_level.setText(Integer.toString(level));
-								total_level.setText(Integer.toString(level + gear_level));
-							}
-						}
-						else
-						{
-							max_level = 20;
-						}
-						dialog.dismiss();
-					}
-				};
-				
-				settingsBuilder.setSingleChoiceItems(options, setting, settingsClickListener);
-				return settingsBuilder.create();
-				
 			case DIALOG_GAMEWIN:
 			
 				AlertDialog.Builder gamewinbuilder = new AlertDialog.Builder(this);

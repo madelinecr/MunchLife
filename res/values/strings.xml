@@ -11,4 +11,10 @@
 	
 	<string name="win">You have won!</string>
 	<string name="ok">Okay</string>
+	
+	<!-- preferences strings -->
+	<string name="sleep">Keep Screen Awake</string>
+	<string name="sleepSummary">Keep screen from sleeping</string>
+	<string name="gamemode">Game Mode</string>
+	<string name="gamemodeSummary">Select game mode to use</string>
 </resources>
