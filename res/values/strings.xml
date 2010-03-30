@@ -6,7 +6,7 @@
 	<string name="up_gear_level">Add Gear</string>
 	<string name="down_gear_level">Remove Gear</string>
 	
-	<string name="reset">Reset Level</string>
+	<string name="reset">Reset</string>
 	<string name="settings">Change Settings</string>
 	
 	<string name="win">You have won!</string>
