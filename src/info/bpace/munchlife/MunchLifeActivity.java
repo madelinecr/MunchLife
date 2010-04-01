@@ -37,6 +37,8 @@ import android.content.Intent;
 
 import android.preference.PreferenceManager;
 
+import android.graphics.Typeface;
+
 import android.util.Log;
 
 public class MunchLifeActivity extends Activity
@@ -120,6 +122,12 @@ public class MunchLifeActivity extends Activity
 		current_level = (TextView)findViewById(R.id.current_level);
 		current_gear_level = (TextView)findViewById(R.id.current_gear_level);
 		total_level = (TextView)findViewById(R.id.total_level);
+		
+		// override font
+		Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/windlass.ttf");
+		current_level.setTypeface(tf);
+		current_gear_level.setTypeface(tf);
+		total_level.setTypeface(tf);
 		
 		// pull old level from savedInstanceState, or default it to 1
 		level = savedInstanceState != null ? savedInstanceState.getInt(KEY_LEVEL)
