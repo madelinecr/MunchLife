@@ -182,6 +182,8 @@ public class MunchLifeActivity extends Activity
 				current_gear_level.setText(Integer.toString(gear_level));
 				total_level.setText("1");
 				return true;
+			case R.id.diceroller:
+				return true;
 			case R.id.settings:
 				Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
 				startActivity(i);
@@ -200,7 +202,6 @@ public class MunchLifeActivity extends Activity
 		switch(id)
 		{
 			case DIALOG_GAMEWIN:
-			
 				AlertDialog.Builder gamewinbuilder = new AlertDialog.Builder(this);
 				gamewinbuilder.setMessage(R.string.win);
 				DialogInterface.OnClickListener gamewinClickListener = new DialogInterface.OnClickListener()
@@ -211,8 +212,7 @@ public class MunchLifeActivity extends Activity
 					}
 				};
 				gamewinbuilder.setNeutralButton(R.string.ok, gamewinClickListener);
-				return gamewinbuilder.create();	
-			
+				return gamewinbuilder.create();
 			default:
 				return super.onCreateDialog(id);
 		}
