@@ -37,11 +37,14 @@ import android.content.Intent;
 
 import android.preference.PreferenceManager;
 
+import java.util.Random;
+
 import android.util.Log;
 
 public class MunchLifeActivity extends Activity
 {
 	public static final int DIALOG_GAMEWIN = 0;
+	public static final int DIALOG_DICEROLLER = 1;
 	
 	public static final String TAG = "MunchLife";
 	public static final String KEY_LEVEL = "savedLevel";
@@ -183,6 +186,7 @@ public class MunchLifeActivity extends Activity
 				total_level.setText("1");
 				return true;
 			case R.id.diceroller:
+				showDialog(DIALOG_DICEROLLER);
 				return true;
 			case R.id.settings:
 				Intent i = new Intent(getApplicationContext(), SettingsActivity.class);
@@ -194,7 +198,7 @@ public class MunchLifeActivity extends Activity
 	}
 	
 	/**
-	 * Controls settings dialog
+	 * Controls settings dialog and dice roller
 	 */
 	@Override
 	protected Dialog onCreateDialog(int id)
@@ -213,10 +217,43 @@ public class MunchLifeActivity extends Activity
 				};
 				gamewinbuilder.setNeutralButton(R.string.ok, gamewinClickListener);
 				return gamewinbuilder.create();
+			case DIALOG_DICEROLLER:
+				AlertDialog.Builder rollerbuilder = new AlertDialog.Builder(this);
+				rollerbuilder.setMessage("temp"); // keeps TextView from being set invisible
+				DialogInterface.OnClickListener rollerClickListener = new DialogInterface.OnClickListener()
+				{
+					public void onClick(DialogInterface dialog, int item)
+					{
+						dialog.dismiss();
+					}
+				};
+				rollerbuilder.setNeutralButton(R.string.ok, rollerClickListener);
+				return rollerbuilder.create();
 			default:
 				return super.onCreateDialog(id);
 		}
 	}
+	
+	/**
+	 * Updates dice roller every time it is opened
+	 */
+	@Override
+	protected void onPrepareDialog(int id, Dialog dialog)
+	{
+		switch(id)
+		{
+			case DIALOG_GAMEWIN:
+				return;
+			case DIALOG_DICEROLLER:
+				Random rand = new Random();
+				Integer roll = rand.nextInt(6) + 1;
+				AlertDialog alertdialog = (AlertDialog)dialog;
+				alertdialog.setMessage(Integer.toString(roll));
+				return;
+			default:
+				return;
+		}
+	} 
 
 	/**
 	 * Increases the level by one and refreshes view as long as it is below max_level
