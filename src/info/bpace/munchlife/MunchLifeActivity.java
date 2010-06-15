@@ -201,6 +201,7 @@ public class MunchLifeActivity extends Activity
 	/**
 	 * Controls settings dialog and dice roller
 	 */
+	ImageView rollview;
 	@Override
 	protected Dialog onCreateDialog(int id)
 	{
@@ -220,10 +221,9 @@ public class MunchLifeActivity extends Activity
 				return gamewinbuilder.create();
 			case DIALOG_DICEROLLER:
 				AlertDialog.Builder rollerbuilder = new AlertDialog.Builder(this);
-				TextView rollcount = new TextView(getApplicationContext());
-				rollcount.setText("one");
-				rollcount.setTextSize(40);
-				rollerbuilder.setView(rollcount);
+				rollview = new ImageView(getApplicationContext());
+				rollview.setImageResource(R.drawable.one);
+				rollerbuilder.setView(rollview);
 				DialogInterface.OnClickListener rollerClickListener = new DialogInterface.OnClickListener()
 				{
 					public void onClick(DialogInterface dialog, int item)
@@ -251,8 +251,29 @@ public class MunchLifeActivity extends Activity
 			case DIALOG_DICEROLLER:
 				Random rand = new Random();
 				Integer roll = rand.nextInt(6) + 1;
-				AlertDialog alertdialog = (AlertDialog)dialog;
-				return;
+				switch(roll)
+				{
+					case 1:
+						rollview.setImageResource(R.drawable.one);
+						return;
+					case 2:
+						rollview.setImageResource(R.drawable.two);
+						return;
+					case 3:
+						rollview.setImageResource(R.drawable.three);
+						return;
+					case 4:
+						rollview.setImageResource(R.drawable.four);
+						return;
+					case 5:
+						rollview.setImageResource(R.drawable.five);
+						return;
+					case 6:
+						rollview.setImageResource(R.drawable.six);
+						return;
+					default:
+						return;
+				}
 			default:
 				return;
 		}
