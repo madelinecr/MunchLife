@@ -22,6 +22,7 @@ import android.os.PowerManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ImageView;
 
 import android.view.MenuInflater;
 import android.view.View;
@@ -219,7 +220,10 @@ public class MunchLifeActivity extends Activity
 				return gamewinbuilder.create();
 			case DIALOG_DICEROLLER:
 				AlertDialog.Builder rollerbuilder = new AlertDialog.Builder(this);
-				rollerbuilder.setMessage("temp"); // keeps TextView from being set invisible
+				TextView rollcount = new TextView(getApplicationContext());
+				rollcount.setText("one");
+				rollcount.setTextSize(40);
+				rollerbuilder.setView(rollcount);
 				DialogInterface.OnClickListener rollerClickListener = new DialogInterface.OnClickListener()
 				{
 					public void onClick(DialogInterface dialog, int item)
@@ -248,7 +252,6 @@ public class MunchLifeActivity extends Activity
 				Random rand = new Random();
 				Integer roll = rand.nextInt(6) + 1;
 				AlertDialog alertdialog = (AlertDialog)dialog;
-				alertdialog.setMessage(Integer.toString(roll));
 				return;
 			default:
 				return;
