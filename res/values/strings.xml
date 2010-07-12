@@ -17,6 +17,8 @@
 	<string name="prefTitle">MunchLife Settings</string>
 	<string name="sleep">Keep Screen Awake</string>
 	<string name="sleepSummary">Keep screen from sleeping</string>
+	<string name="victory">Victory Dialog</string>
+	<string name="victorySummary">Select whether to display a dialog on reaching the level cap</string>
 	<string name="gamemode">Game Mode</string>
 	<string name="gamemodeSummary">Select game mode to use</string>
 </resources>

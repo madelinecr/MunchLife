@@ -7,6 +7,12 @@
 		 android:defaultValue="false"
 		 android:summary="@string/sleepSummary"
 		 android:key="sleepPref" />
+		
+		<CheckBoxPreference
+		 android:title="@string/victory"
+		 android:defaultValue="true"
+		 android:summary="@string/victorySummary"
+		 android:key="victoryPref" />
 		 
 		<ListPreference
 		 android:title="@string/gamemode"

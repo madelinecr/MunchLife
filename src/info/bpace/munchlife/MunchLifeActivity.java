@@ -62,6 +62,7 @@ public class MunchLifeActivity extends Activity
 	public int max_level = 10;
 	public int gear_level = 0;
 	public boolean sleepPref;
+	public boolean victoryPref;
 	public String gamemodePref;
 	
 	/**
@@ -76,6 +77,7 @@ public class MunchLifeActivity extends Activity
 		wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, TAG);
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		sleepPref = prefs.getBoolean("sleepPref", false);
+		victoryPref = prefs.getBoolean("victoryPref", true);
 		gamemodePref = prefs.getString("gamemodePref", "std");
 		
 		if(gamemodePref.equals("epic"))
@@ -293,7 +295,7 @@ public class MunchLifeActivity extends Activity
 				current_level.setText(Integer.toString(level));
 				total_level.setText(Integer.toString(level + gear_level));
 				// if you've won, display message
-				if(level == max_level)
+				if(level == max_level && victoryPref == true)
 				{
 					showDialog(DIALOG_GAMEWIN);
 				}
