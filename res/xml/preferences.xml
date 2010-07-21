@@ -21,6 +21,11 @@
 		 android:key="gamemodePref"
 		 android:entries="@array/gamemodeDisplay"
 		 android:entryValues="@array/gamemode" />
+		 
+		<EditTextPreference
+		 android:title="EditText"
+		 android:defaultValue="lol"
+		 android:inputType="number" />
 	</PreferenceCategory>
 	
 </PreferenceScreen>
