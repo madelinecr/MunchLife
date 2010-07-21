@@ -14,17 +14,10 @@
 		 android:summary="@string/victorySummary"
 		 android:key="victoryPref" />
 		 
-		<ListPreference
-		 android:title="@string/gamemode"
-		 android:defaultValue="std"
-		 android:summary="@string/gamemodeSummary"
-		 android:key="gamemodePref"
-		 android:entries="@array/gamemodeDisplay"
-		 android:entryValues="@array/gamemode" />
-		 
 		<EditTextPreference
-		 android:title="EditText"
-		 android:defaultValue="lol"
+		 android:title="@string/maxlevel"
+		 android:defaultValue="5"
+		 android:key="maxlevelPref"
 		 android:inputType="number" />
 	</PreferenceCategory>
 	

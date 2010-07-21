@@ -17,14 +17,48 @@ package info.bpace.munchlife;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceActivity;
+import android.preference.Preference.OnPreferenceChangeListener;
+import android.widget.Toast;
+
+import android.util.Log;
 
 public class SettingsActivity extends PreferenceActivity
 {
+	OnPreferenceChangeListener levelListener = new OnPreferenceChangeListener()
+	{
+		public boolean onPreferenceChange(Preference pref, Object newValue)
+		{
+			// only process if newValue is not empty
+			int value = 0;
+			try
+			{
+				value = Integer.parseInt(newValue.toString());
+			}
+			catch(NumberFormatException error)
+			{
+				Log.w(MunchLifeActivity.TAG, "NumberFormatException: " + error.getMessage());
+			}
+		
+			if(value > 0 && value < 100)
+			{
+				return true;
+			}
+			else
+			{
+				Toast.makeText(getApplicationContext(), "Incorrect input", Toast.LENGTH_SHORT).show();
+				return false;
+			}
+		}
+	};
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences);
+		Preference levelPreference = getPreferenceScreen().findPreference("maxlevelPref");
+		levelPreference.setOnPreferenceChangeListener(levelListener);
 	}
 }
