@@ -63,7 +63,7 @@ public class MunchLifeActivity extends Activity
 	public int gear_level = 0;
 	public boolean sleepPref;
 	public boolean victoryPref;
-	public String gamemodePref;
+	public String maxlevelPref;
 	
 	/**
 	 * Pulls preferences and makes sure current application state matches 
@@ -78,14 +78,15 @@ public class MunchLifeActivity extends Activity
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		sleepPref = prefs.getBoolean("sleepPref", false);
 		victoryPref = prefs.getBoolean("victoryPref", true);
-		gamemodePref = prefs.getString("gamemodePref", "std");
+		maxlevelPref = prefs.getString("maxlevelPref", "10");
 		
-		if(gamemodePref.equals("epic"))
+		try
 		{
-			max_level = 20;
+			max_level = Integer.parseInt(maxlevelPref);
 		}
-		else
+		catch(NumberFormatException error)
 		{
+			Log.e(TAG, "NumberFormatException: " + error.getMessage());
 			max_level = 10;
 		}
 		
