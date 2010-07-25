@@ -30,7 +30,6 @@ public class SettingsActivity extends PreferenceActivity
 	{
 		public boolean onPreferenceChange(Preference pref, Object newValue)
 		{
-			// only process if newValue is not empty
 			int value = 0;
 			try
 			{
@@ -41,13 +40,13 @@ public class SettingsActivity extends PreferenceActivity
 				Log.w(MunchLifeActivity.TAG, "NumberFormatException: " + error.getMessage());
 			}
 		
-			if(value > 0 && value < 100)
+			if(value > 1 && value <= 100)
 			{
 				return true;
 			}
 			else
 			{
-				Toast.makeText(getApplicationContext(), "Incorrect input", Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(), R.string.maxlevelError, Toast.LENGTH_SHORT).show();
 				return false;
 			}
 		}
