@@ -226,6 +226,9 @@ public class MunchLifeActivity extends Activity
 				AlertDialog.Builder rollerbuilder = new AlertDialog.Builder(this);
 				rollview = new ImageView(getApplicationContext());
 				rollview.setImageResource(R.drawable.one);
+				rollview.setAdjustViewBounds(true);
+				rollview.setMaxHeight(256);
+				rollview.setMaxWidth(256);
 				rollerbuilder.setView(rollview);
 				DialogInterface.OnClickListener rollerClickListener = new DialogInterface.OnClickListener()
 				{
