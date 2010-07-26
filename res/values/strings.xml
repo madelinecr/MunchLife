@@ -7,6 +7,7 @@
 	<string name="down_gear_level">Remove Gear</string>
 	
 	<string name="reset">Reset</string>
+	<string name="diceroller">Roll Dice</string>
 	<string name="settings">Change Settings</string>
 	
 	<string name="win">You have won!</string>
@@ -16,6 +17,9 @@
 	<string name="prefTitle">MunchLife Settings</string>
 	<string name="sleep">Keep Screen Awake</string>
 	<string name="sleepSummary">Keep screen from sleeping</string>
-	<string name="gamemode">Game Mode</string>
-	<string name="gamemodeSummary">Select game mode to use</string>
+	<string name="victory">Victory Dialog</string>
+	<string name="victorySummary">Select whether to display a dialog on reaching the level cap</string>
+	<string name="maxlevel">Max Level</string>
+	<string name="maxlevelSummary">The level at which you win.</string>
+	<string name="maxlevelError">Please enter a number between 2 and 100</string>
 </resources>
