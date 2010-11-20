@@ -4,3 +4,5 @@ gen
 local.properties
 *~
 build.properties
+.classpath
+.project
