@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
  android:orientation="vertical"
  android:layout_width="fill_parent"
- android:layout_height="fill_parent">
+ android:layout_height="fill_parent"
+ android:background="@drawable/background">
 
 	<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	 android:id="@+id/level_table"
@@ -27,14 +28,16 @@
 			 android:layout_gravity="center"
 			 android:textSize="70sp"
 			 android:textStyle="bold"
-			 android:text="1"/>
+			 android:text="1"
+			 android:textColor="@color/darkgray"/>
 		
 			<TextView android:id="@+id/current_gear_level"
 			 android:layout_width="wrap_content"
 			 android:layout_gravity="center"
 			 android:textSize="70sp"
 			 android:textStyle="bold"
-			 android:text="0"/>
+			 android:text="0"
+			 android:textColor='@color/darkgray'/>
 		</TableRow>
 	
 		<TableRow>
@@ -56,6 +59,7 @@
  android:layout_toRightOf="@id/level_table"
  android:textSize="140sp"
  android:textStyle="bold"
- android:text="1"/>
+ android:text="1"
+ android:textColor='@color/darkgray'/>
 
 </RelativeLayout>
