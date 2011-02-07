@@ -4,7 +4,7 @@
 	<PreferenceCategory android:title="@string/prefTitle">
 		<CheckBoxPreference
 		 android:title="@string/sleep"
-		 android:defaultValue="false"
+		 android:defaultValue="true"
 		 android:summary="@string/sleepSummary"
 		 android:key="sleepPref" />
 		
