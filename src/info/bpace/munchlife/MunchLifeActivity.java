@@ -98,11 +98,6 @@ public class MunchLifeActivity extends Activity
 			current_level.setText(Integer.toString(level));
 			total_level.setText(Integer.toString(level + gear_level));
 		}
-		
-		if(sleepPref == true)
-		{
-			wl.acquire();
-		}
 	}
 	
 	/**
@@ -170,6 +165,16 @@ public class MunchLifeActivity extends Activity
 			 wl.release();
 		}
 	}
+
+  @Override
+  protected void onResume()
+  {
+    super.onResume();
+    if(sleepPref == true)
+    {
+      wl.acquire();
+    }
+  }
 	
 	/**
 	 * Create options menu from XML
