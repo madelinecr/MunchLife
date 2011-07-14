@@ -37,7 +37,8 @@ public class SettingsActivity extends PreferenceActivity
 			}
 			catch(NumberFormatException error)
 			{
-				Log.w(MunchLifeActivity.TAG, "NumberFormatException: " + error.getMessage());
+				Log.w(MunchLifeActivity.TAG, 
+              "NumberFormatException: " + error.getMessage());
 			}
 		
 			if(value > 1 && value <= 100)
@@ -46,7 +47,9 @@ public class SettingsActivity extends PreferenceActivity
 			}
 			else
 			{
-				Toast.makeText(getApplicationContext(), R.string.maxlevelError, Toast.LENGTH_SHORT).show();
+				Toast.makeText(getApplicationContext(),
+                       R.string.maxlevelError,
+                       Toast.LENGTH_SHORT).show();
 				return false;
 			}
 		}
@@ -57,7 +60,8 @@ public class SettingsActivity extends PreferenceActivity
 	{
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(R.xml.preferences);
-		Preference levelPreference = getPreferenceScreen().findPreference("maxlevelPref");
+		Preference levelPreference;
+    levelPreference = getPreferenceScreen().findPreference("maxlevelPref");
 		levelPreference.setOnPreferenceChangeListener(levelListener);
 	}
 }

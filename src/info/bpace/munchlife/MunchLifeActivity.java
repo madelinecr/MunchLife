@@ -76,7 +76,8 @@ public class MunchLifeActivity extends Activity
 		super.onStart();
 		pm = (PowerManager) getSystemService(POWER_SERVICE);
 		wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, TAG);
-		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+		SharedPreferences prefs;
+    prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		sleepPref = prefs.getBoolean("sleepPref", false);
 		victoryPref = prefs.getBoolean("victoryPref", true);
 		maxlevelPref = prefs.getString("maxlevelPref", "10");
@@ -220,7 +221,8 @@ public class MunchLifeActivity extends Activity
 			case DIALOG_GAMEWIN:
 				AlertDialog.Builder gamewinbuilder = new AlertDialog.Builder(this);
 				gamewinbuilder.setMessage(R.string.win);
-				DialogInterface.OnClickListener gamewinClickListener = new DialogInterface.OnClickListener()
+				DialogInterface.OnClickListener gamewinClickListener;
+        gamewinClickListener = new DialogInterface.OnClickListener()
 				{
 					public void onClick(DialogInterface dialog, int item)
 					{
@@ -237,7 +239,8 @@ public class MunchLifeActivity extends Activity
 				rollview.setMaxHeight(256);
 				rollview.setMaxWidth(256);
 				rollerbuilder.setView(rollview);
-				DialogInterface.OnClickListener rollerClickListener = new DialogInterface.OnClickListener()
+				DialogInterface.OnClickListener rollerClickListener;
+        rollerClickListener = new DialogInterface.OnClickListener()
 				{
 					public void onClick(DialogInterface dialog, int item)
 					{
@@ -293,7 +296,8 @@ public class MunchLifeActivity extends Activity
 	} 
 
 	/**
-	 * Increases the level by one and refreshes view as long as it is below max_level
+	 * Increases the level by one and refreshes view as long as it is below 
+   * max_level
 	 */
 	private OnClickListener levelUpClickListener = new OnClickListener()
 	{
