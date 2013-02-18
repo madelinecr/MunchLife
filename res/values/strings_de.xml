@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string name="app_name">MunchLife</string>
+<string name="up_level">Stufe rauf</string>
+<string name="down_level">Stufe runter</string>
+<string name="up_gear_level">Bonus aufstocken</string>
+<string name="down_gear_level">Bonus abziehen</string>
+
+<string name="reset">Zurücksetzen</string>
+<string name="diceroller">Würfeln</string>
+<string name="settings">Einstellungen</string>
+
+<string name="win">Du hast gewonnen!</string>
+<string name="ok">Schließen</string>
+
+<!-- preferences strings -->
+<string name="prefTitle">MunchLife Einstellungen</string>
+<string name="sleep">Ruhezustand deaktivieren</string>
+<string name="sleepSummary">Deaktiviert den Ruhezustand</string>
+<string name="victory">Sieg Dialog</string>
+<string name="victorySummary">Aktivieren um den Sieg anzuzeigen wenn die maximale Stufe erreicht wurde.</string>
+<string name="maxlevel">Maximale Stufe</string>
+<string name="maxlevelSummary">Stufe, welche erreicht werden muss um zu siegen.</string>
+<string name="maxlevelError">Bitte wähle eine Zahl von 2 bis 100</string>
+</resources>
