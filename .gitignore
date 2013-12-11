@@ -7,3 +7,5 @@ build.properties
 .classpath
 .project
 *.swp
+.idea
+out
