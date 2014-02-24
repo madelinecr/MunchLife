@@ -23,7 +23,6 @@ import android.view.Display;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 import android.widget.ImageView;
 
 import android.view.MenuInflater;
