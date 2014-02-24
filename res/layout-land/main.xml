@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
- android:orientation="vertical"
+ android:orientation="horizontal"
  android:layout_width="fill_parent"
  android:layout_height="fill_parent">
 
@@ -47,13 +47,22 @@
 	
 	</TableLayout>
 
-  <TextView android:id="@+id/total_level"
-   android:layout_width="fill_parent"
-   android:layout_height="fill_parent"
-   android:gravity="center"
-   android:layout_toRightOf="@id/level_table"
-   android:textSize="140sp"
-   android:textStyle="bold"
-   android:text="1"/>
-   
+    <TextView android:id="@+id/total_level"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/level_table"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="30dp"
+        android:gravity="center"
+        android:textSize="140sp"
+        android:textStyle="bold"
+        android:text="1"/>
+
+    <ImageView android:id="@+id/gender"
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:gravity="right"
+        android:src="@drawable/male_landscape"/>
 </RelativeLayout>

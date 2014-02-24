@@ -19,6 +19,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.PowerManager;
 
+import android.view.Display;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,13 +53,18 @@ public class MunchLifeActivity extends Activity
 	public static final String TAG = "MunchLife";
 	public static final String KEY_LEVEL = "savedLevel";
 	public static final String KEY_GEAR_LEVEL = "savedGearLevel";
+    public static final String KEY_GENDER_FEMALE = "savedGenderFemale";
 	
 	public TextView current_level;
 	public TextView current_gear_level;
 	public TextView total_level;
+    public ImageView gender;
+    public boolean gender_female;
 	
 	PowerManager pm;
 	PowerManager.WakeLock wl;
+
+    public Display devDisplay;
 	
 	public int level = 1;
 	public int max_level = 10;
@@ -77,7 +84,7 @@ public class MunchLifeActivity extends Activity
 		pm = (PowerManager) getSystemService(POWER_SERVICE);
 		wl = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, TAG);
 		SharedPreferences prefs;
-    prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
+        prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
 		sleepPref = prefs.getBoolean("sleepPref", false);
 		victoryPref = prefs.getBoolean("victoryPref", true);
 		maxlevelPref = prefs.getString("maxlevelPref", "10");
@@ -120,12 +127,15 @@ public class MunchLifeActivity extends Activity
 		
 		Button down_gear_button = (Button)findViewById(R.id.down_gear_button);
 		down_gear_button.setOnClickListener(gearDownClickListener);
-		
+
 		current_level = (TextView)findViewById(R.id.current_level);
 		current_gear_level = (TextView)findViewById(R.id.current_gear_level);
 		total_level = (TextView)findViewById(R.id.total_level);
-		
-		// override font
+
+        gender = (ImageView)findViewById(R.id.gender);
+        gender.setOnClickListener(genderClickListener);
+
+        // override font
 		Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/windlass.ttf");
 		current_level.setTypeface(tf);
 		current_gear_level.setTypeface(tf);
@@ -136,10 +146,29 @@ public class MunchLifeActivity extends Activity
 		                                   : 1;
 		gear_level = savedInstanceState != null ? savedInstanceState.getInt(KEY_GEAR_LEVEL)
 		                                        : 0;
-			
+        gender_female = savedInstanceState != null && savedInstanceState.getBoolean(KEY_GENDER_FEMALE);
+
 		current_level.setText(Integer.toString(level));
 		current_gear_level.setText(Integer.toString(gear_level));
 		total_level.setText(Integer.toString(level + gear_level));
+
+        // Set gender up
+        WindowManager winManager = (WindowManager) getSystemService(WINDOW_SERVICE);
+        devDisplay = winManager.getDefaultDisplay();
+
+        if(devDisplay.getRotation() == 0) {
+            if(gender_female) {
+                gender.setImageResource(R.drawable.female_portrait);
+            } else {
+                gender.setImageResource(R.drawable.male_portrait);
+            }
+        } else {
+            if(gender_female) {
+                gender.setImageResource(R.drawable.female_landscape);
+            } else {
+                gender.setImageResource(R.drawable.male_landscape);
+            }
+        }
 	}
 	
 	/**
@@ -151,6 +180,7 @@ public class MunchLifeActivity extends Activity
 		super.onSaveInstanceState(outState);
 		outState.putInt(KEY_LEVEL, level);
 		outState.putInt(KEY_GEAR_LEVEL, gear_level);
+        outState.putBoolean(KEY_GENDER_FEMALE, gender_female);
 	}
 	
 	/**
@@ -169,11 +199,11 @@ public class MunchLifeActivity extends Activity
   @Override
   protected void onResume()
   {
-    super.onResume();
-    if(sleepPref == true)
-    {
-      wl.acquire();
-    }
+      super.onResume();
+      if(sleepPref == true)
+      {
+        wl.acquire();
+      }
   }
 	
 	/**
@@ -322,7 +352,7 @@ public class MunchLifeActivity extends Activity
 			}
 		}
 	};
-	
+
 	/**
 	 * Decreases the level by one and refreshes view as long as it is above 1
 	 */
@@ -367,4 +397,24 @@ public class MunchLifeActivity extends Activity
 			}
 		}
 	};
+
+    private OnClickListener genderClickListener = new OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            if(devDisplay.getRotation() == 0) {
+                if(gender_female == false) {
+                    gender.setImageResource(R.drawable.female_portrait);
+                } else {
+                    gender.setImageResource(R.drawable.male_portrait);
+                }
+            } else {
+                if(gender_female == false) {
+                    gender.setImageResource(R.drawable.female_landscape);
+                } else {
+                    gender.setImageResource(R.drawable.male_landscape);
+                }
+            }
+            gender_female = gender_female == true ? false : true;
+        }
+    };
 }

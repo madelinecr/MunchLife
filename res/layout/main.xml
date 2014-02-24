@@ -48,11 +48,18 @@
 
 	<TextView android:id="@+id/total_level"
 	 android:layout_width="fill_parent"
-	 android:layout_height="fill_parent"
+	 android:layout_height="wrap_content"
+     android:layout_marginTop="50dp"
 	 android:gravity="center"
 	 android:layout_below="@id/level_table"
 	 android:textSize="140sp"
 	 android:textStyle="bold"
 	 android:text="1"/>
 
+    <ImageView android:id="@+id/gender"
+     android:layout_width="fill_parent"
+     android:layout_height="160dp"
+     android:gravity="center"
+     android:src="@drawable/male_portrait"
+     android:layout_below="@id/total_level"/>
 </RelativeLayout>
