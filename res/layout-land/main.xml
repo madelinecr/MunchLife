@@ -48,18 +48,18 @@
 	</TableLayout>
 
     <TextView android:id="@+id/total_level"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/gender"
         android:layout_toRightOf="@id/level_table"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="30dp"
         android:gravity="center"
         android:textSize="140sp"
         android:textStyle="bold"
         android:text="1"/>
 
     <ImageView android:id="@+id/gender"
-        android:layout_width="160dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_alignParentRight="true"

@@ -58,7 +58,7 @@
 
     <ImageView android:id="@+id/gender"
      android:layout_width="fill_parent"
-     android:layout_height="160dp"
+     android:layout_height="120dp"
      android:gravity="center"
      android:src="@drawable/male_portrait"
      android:layout_below="@id/total_level"/>
